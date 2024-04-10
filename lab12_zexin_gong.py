@@ -10,7 +10,7 @@ import pandas as pd
 
 DATA_URL = 'car_data.csv'
 
-@st.cache
+@st.cache_data
 def load_data():
     data = pd.read_csv(DATA_URL)
     return data
@@ -29,14 +29,20 @@ year = st.sidebar.slider('Year Range', 2000, 2024, (2000, 2024))
 if st.sidebar.button('Submit'):
     filtered_data = data
     if car_name:
-        filtered_data = filtered_data[filtered_data['car_name'].str.contains(car_name, case=False)]
+        filtered_data = filtered_data[filtered_data['Car_Name'].str.contains(car_name, case=False)]
     if transmission:
-        filtered_data = filtered_data[filtered_data['transmission'].isin(transmission)]
-    filtered_data = filtered_data[(filtered_data['selling_price'] >= price[0]) & (filtered_data['selling_price'] <= price[1])]
-    filtered_data = filtered_data[(filtered_data['year'] >= year[0]) & (filtered_data['year'] <= year[1])]
+        filtered_data = filtered_data[filtered_data['Transmission'].isin(transmission)]
+    filtered_data = filtered_data[(filtered_data['Selling_Price'] >= price[0]) & (filtered_data['Selling_Price'] <= price[1])]
+    filtered_data = filtered_data[(filtered_data['Year'] >= year[0]) & (filtered_data['Year'] <= year[1])]
     
     st.write(filtered_data)
 else:
     st.write(data)
+
+
+
+# In[ ]:
+
+
 
 
