@@ -21,7 +21,7 @@ data = load_data()
 st.sidebar.header('Filter Options')
 car_name = st.sidebar.text_input('Car Name', '')
 transmission = st.sidebar.multiselect('Transmission', ['Manual', 'Automatic'], ['Manual', 'Automatic'])
-selling_price = st.sidebar.slider('Selling Range', min_value=0, max_value=35, value=(0, 20))
+selling_price = st.sidebar.slider('Selling Range', 0, 20, value=(0, 20))
 year = st.sidebar.slider('Year Range', 2000, 2024, (2000, 2024))
 
 
@@ -33,7 +33,7 @@ if st.sidebar.button('Submit'):
     if transmission:
         filtered_data = filtered_data[filtered_data['Transmission'].isin(transmission)]
     filtered_data = filtered_data[(filtered_data['Selling_Price'] >= min_price) & (filtered_data['Selling_Price'] <= max_price)]
-    filtered_data = filtered_data[(filtered_data['Year'] >= year[0]) & (filtered_data['Year'] <= year[1])]
+    filtered_data = filtered_data[(filtered_data['Year'] >= min_year) & (filtered_data['Year'] <= max_year)]
     
     st.write(filtered_data)
 else:
